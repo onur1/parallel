@@ -76,14 +76,21 @@ LOOP:
 		select {
 		case <-exit:
 			err, r, exit = ctx.Err(), nil, nil
-			// TODO
+			if s.head == s.tail {
+				break LOOP
+			}
 		default:
 		}
 
 		select {
+		case <-exit:
+			err, r, exit = ctx.Err(), nil, nil
+			if s.head == s.tail {
+				break LOOP
+			}
 		case v, ok := <-r:
 			if !ok {
-				if s.head-s.tail == 0 {
+				if s.head == s.tail {
 					break LOOP
 				}
 				r = nil
