@@ -43,12 +43,12 @@ func (s *Parallel[I, O]) Err() error {
 	return err
 }
 
-func (s *Parallel[I, O]) Loop(ctx context.Context, src chan I, task func(context.Context, I) (O, error)) (w chan O) {
-	w = make(chan O)
+func (s *Parallel[I, O]) Loop(ctx context.Context, src <-chan I, task func(context.Context, I) (O, error)) <-chan O {
+	w := make(chan O)
 
 	go s.loop(ctx, src, w, task)
 
-	return
+	return w
 }
 
 type result[T any] struct {
@@ -57,7 +57,7 @@ type result[T any] struct {
 	err   error
 }
 
-func (s *Parallel[I, O]) loop(ctx context.Context, src chan I, w chan O, run func(context.Context, I) (O, error)) {
+func (s *Parallel[I, O]) loop(ctx context.Context, src <-chan I, w chan<- O, run func(context.Context, I) (O, error)) {
 	r := src
 	done := make(chan *result[O])
 	null := *new(O)
