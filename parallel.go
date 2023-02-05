@@ -115,12 +115,12 @@ LOOP:
 			pending += 1
 
 			if err != nil {
-				if (s.head - (s.tail + pending)) == 0 {
+				if s.head == (s.tail + pending) {
 					break LOOP
 				}
 				break
 			} else if res.err != nil {
-				if (s.head - (s.tail + pending)) == 0 {
+				if s.head == (s.tail + pending) {
 					break LOOP
 				}
 
