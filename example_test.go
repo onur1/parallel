@@ -10,8 +10,6 @@ import (
 )
 
 func ExampleParallel() {
-	rand.Seed(time.Now().UnixNano())
-
 	taskFunc := func(ctx context.Context, x int) (string, error) {
 		time.Sleep(time.Duration(100+(100*rand.Intn(10))) * time.Millisecond)
 		return fmt.Sprintf("hello-%d", x), nil
@@ -20,7 +18,9 @@ func ExampleParallel() {
 	d := parallel.NewParallel[int, string](2)
 	src := make(chan int)
 
-	dst := d.Loop(context.TODO(), src, taskFunc)
+	dst := make(chan string)
+
+	go d.Loop(context.TODO(), src, dst, taskFunc)
 
 	go func() {
 		for i := 1; i < 10; i++ {
