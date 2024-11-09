@@ -120,14 +120,10 @@ LOOP:
 				}
 				break
 			} else if res.err != nil {
+				err, r, exit = res.err, nil, nil // Cancel further tasks on error
 				if s.head == (s.tail + pending) {
 					break LOOP
 				}
-
-				err, r, exit = res.err, nil, nil
-
-				cancel()
-
 				break
 			}
 
