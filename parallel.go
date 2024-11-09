@@ -28,6 +28,15 @@ func (s *Parallel[I, O]) Limit() int {
 }
 
 func (s *Parallel[I, O]) Flush() []O {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	// If no error occurred, return an empty slice
+	if s.err == nil {
+		return []O{}
+	}
+
+	// Calculate the number of items to flush and collect them in order
 	diff := s.head - s.tail
 	v := make([]O, diff)
 	for i := s.tail; i != s.head; i++ {
@@ -38,9 +47,8 @@ func (s *Parallel[I, O]) Flush() []O {
 
 func (s *Parallel[I, O]) Err() error {
 	s.mu.Lock()
-	err := s.err
-	s.mu.Unlock()
-	return err
+	defer s.mu.Unlock()
+	return s.err
 }
 
 func (s *Parallel[I, O]) Loop(ctx context.Context, src <-chan I, task func(context.Context, I) (O, error)) <-chan O {
