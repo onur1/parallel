@@ -1,5 +1,7 @@
 # parallel
 
+![parallel](./parallel-gopher.webp)
+
 A `Parallel` executes tasks concurrently while preserving the order of output to match the sequence of input.
 
 ## Features
@@ -54,7 +56,7 @@ go func() {
         src <- i
     }
     close(src) // Close channel when all tasks are sent
-}
+}()
 
 // Read ordered results from `dst` channel
 for result := range dst {
