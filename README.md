@@ -12,7 +12,7 @@ A `Parallel` executes tasks concurrently while preserving the order of output to
 ## Installation
 
 ```bash
-go get github.com/onur1/parallel
+go get github.com/tetsuo/parallel
 ```
 
 ## Usage
@@ -22,7 +22,7 @@ go get github.com/onur1/parallel
 To create a new `Parallel` instance, use `NewParallel`, specifying the desired level of parallelism. The level will automatically be rounded to the nearest power of 2.
 
 ```go
-import "github.com/onur1/parallel"
+import "github.com/tetsuo/parallel"
 
 p := parallel.NewParallel(4)
 ```
@@ -94,7 +94,7 @@ import (
 	"math/rand"
 	"time"
 
-    "github.com/onur1/parallel"
+    "github.com/tetsuo/parallel"
 )
 
 func main() {

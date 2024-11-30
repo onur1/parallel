@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/onur1/parallel"
+	"github.com/tetsuo/parallel"
 	"github.com/stretchr/testify/assert"
 )
 

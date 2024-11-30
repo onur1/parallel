@@ -1,10 +1,10 @@
-module github.com/onur1/parallel
+module github.com/tetsuo/parallel
 
 go 1.18
 
 require (
-	github.com/onur1/ring v0.0.3
 	github.com/stretchr/testify v1.8.1
+	github.com/tetsuo/ring v0.0.4
 )
 
 require (

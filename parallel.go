@@ -4,7 +4,7 @@ import (
 	"context"
 	"sync"
 
-	"github.com/onur1/ring"
+	"github.com/tetsuo/ring"
 )
 
 // Parallel executes tasks concurrently while preserving the output order to match the input sequence.

@@ -6,7 +6,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/onur1/parallel"
+	"github.com/tetsuo/parallel"
 )
 
 func ExampleParallel() {
